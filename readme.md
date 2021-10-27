@@ -81,3 +81,25 @@ a folder m5out will be generated containing,
 - config.ini - configurations that are being used for the run 
 - config.json - same configurations in JSON format
 
+## Analysis of the compilation stats
+``` cat config.ini | grep -i system.cpu.branchPred``` - will give all the stats during the test 
+![alt text](./images/branchPredStats.jpg "Branch Predictor Stats")
+
+And, can use the below Formulaes to compute the BTB & Mis Predictions & Percentages
+``` 
+BTBMissPct = (1 - (BTBHits/BTBLookups)) * 100
+where: BTB Hits -> total number of BTB Hits BTBLookups -> total number of BTB References
+ ```
+``` 
+BranchMispredPercent = (numBranchMispred / numBranches) * 100;
+
+where: numBranchMispred -> total number of mispredicted Branches numBranches -> total number of branches fetched
+```
+
+
+
+
+### Updating branch predictor configurations
+
+Once com
+
