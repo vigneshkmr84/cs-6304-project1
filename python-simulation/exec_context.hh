@@ -152,6 +152,12 @@ class SimpleExecContext : public ExecContext {
    // Instruction mix histogram by OpClass
    Stats::Vector statExecutedInstType;
 
+   // @Author - Vignesh
+   // Declaring variable for Branch Mis predict
+   Stats::Formula BranchMispredPercent;
+    // @Author - Vignesh
+
+    
   public:
     /** Constructor */
     SimpleExecContext(BaseSimpleCPU* _cpu, SimpleThread* _thread)

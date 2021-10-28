@@ -356,7 +356,20 @@ BaseSimpleCPU::regStats()
             .desc("Class of executed instruction")
             .flags(total | pdf | dist)
             ;
+        
+        // @Author - Vignesh
+        /** Code added for Branch Mis prediction in stats **/
+        t_info.BranchMispredPercent = 
+            (t_info.numBranchMispred / t_info.numBranches)*100;
 
+        t_info.BranchMispredPercent
+            ,name(thread_str + ".BranchMispredPercent")
+            .desc("Percentage of Branch Mis-Predicts")
+            .prereq(t_info.BranchMispredPercent);
+        
+        /** End of code for Branch Mis predict **/
+        // @Author - Vignesh
+        
         for (unsigned i = 0; i < Num_OpClasses; ++i) {
             t_info.statExecutedInstType.subname(i, Enums::OpClassStrings[i]);
         }
