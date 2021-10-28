@@ -107,6 +107,17 @@ BPredUnit::regStats()
         .precision(6);
     BTBHitPct = (BTBHits / BTBLookups) * 100;
 
+    // @Author - Vignesh
+    /** Branch Mis Predict Percent (%) **/
+    BTBMissPct
+        .name(name()+".BTBMissPct")
+        .desc("BTB Miss-Percentage")
+        .precision(6);
+    
+    // calculating the percantage
+    BTBMissPct = (1-(BTBHits/BTBLookups))*100;
+    // @Author - Vignesh
+    
     usedRAS
         .name(name() + ".usedRAS")
         .desc("Number of times the RAS was used to get a target.")

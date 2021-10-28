@@ -295,6 +295,11 @@ class BPredUnit : public SimObject
     /** Stat for number of times the RAS is incorrect. */
     Stats::Scalar RASIncorrect;
 
+    // @Author - Vignesh
+    //Stats for percent times an entry in BTB not found
+    Stats::Formula BTBMissPct;
+    // @Author - Vignesh
+
   protected:
     /** Number of bits to shift instructions by for predictor addresses. */
     const unsigned instShiftAmt;

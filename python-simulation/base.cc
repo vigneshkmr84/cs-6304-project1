@@ -363,13 +363,13 @@ BaseSimpleCPU::regStats()
             (t_info.numBranchMispred / t_info.numBranches)*100;
 
         t_info.BranchMispredPercent
-            ,name(thread_str + ".BranchMispredPercent")
+            .name(thread_str + ".BranchMispredPercent")
             .desc("Percentage of Branch Mis-Predicts")
             .prereq(t_info.BranchMispredPercent);
         
         /** End of code for Branch Mis predict **/
         // @Author - Vignesh
-        
+
         for (unsigned i = 0; i < Num_OpClasses; ++i) {
             t_info.statExecutedInstType.subname(i, Enums::OpClassStrings[i]);
         }
