@@ -142,7 +142,10 @@ BTBTagSize = Param.Unsigned(16, "Size of the BTB tags, in bits")
 
 Once you run the script and the benchmarks, do a backup of the files (common sense :P )
 
-mv -vf m5out_458/ m5out_458_backup/. 
+```
+mv -vf m5out_458/ m5out_458_backup/.  
+
 mv -vf m5out_470/ m5out_470_backup/
+```
 
 
