@@ -1,4 +1,4 @@
-# gem5 Setup Steps
+# gem5 Simulation & Benchmarking
 
 ## About gem5
 Gem5 is a discrete event simulator  
@@ -75,15 +75,11 @@ Move the runGem5.sh script into one of the simulators folder
 ### run the run gem5 script
 ``` bash runGem5.sh```   
 
-The script contains the below code:  
-<<<<<<< HEAD
+The script contains the below code (500MM instruction):  
 
 ``` time $GEM5_DIR/build/X86/gem5.opt -d ./m5out $GEM5_DIR/configs/example/se.py -c $BENCHMARK -o "$ARGUMENT" -I 500000000 -- cpu-type=timing --caches --l2cache --l1d_size=128kB --l1i_size=128kB -- l2_size=1MB --l1d_assoc=2 --l1i_assoc=2 --l2_assoc=4 --cacheline_size=64```
 
 ### The above configs remain constant throughout the program
-=======
-``` time $GEM5_DIR/build/X86/gem5.opt -d ~/m5out $GEM5_DIR/configs/example/se.py -c $BENCHMARK -o $ARGUMENT -I 100000000 --cpu-type=atomic --caches --l2cache --l1d_size=128kB --l1i_size=128kB --l2_size=1MB --l1d_assoc=2 --l1i_assoc=2 --l2_assoc=1 --cacheline_size=64 ```
->>>>>>> 904750ad0f186d6a915af582e5f06669b4d84e5e
 
 ### Main Configuration Parameters: 
 - I = # of instructions
@@ -91,7 +87,7 @@ The script contains the below code:
 - cpu-type = Can be timing / atomic type
 - cache configurations
 
-~~customize the run parameters in accordance to the requirement like cache, # of instructions etc.~~
+customize the run parameters in accordance to the requirement like cache, # of instructions etc.
 
 a folder m5out will be generated containing, 
 - stats.txt will contain all the stats of the run
@@ -124,35 +120,6 @@ void BaseSimpleCPU::regStats() {
 
 }
 
-<<<<<<< HEAD
-## Updating branch predictor configurations
-
-Modify the changes for specific Predictor at ``` src/cpu/pred/BranchPredictor.py```
-A sample file is attached [here](./python-simulation/BranchPredictor.py)
-
-### Possible Configurations:
-BTB Values: 4096, 2048  
-
-- Local Predictor: 2048, 1024
-    => 2x2 = 4 possible combinations
-    |BTB | Local Predictor | status |
-    |----|:---------------:|:------:|
-    |2048| 2048, 1024      | `done`   |
-    |4096| 2048, 1024      | `done`   |
-
-- BiMod Predictor:  
-    Global: 8192, 4096, 2048  
-    Choice: 8192, 4096, 2048 
-    => 3x3x2 = 18 combinations
-- Tournament Predictor:  
-    Local: 2048, 1024   
-    Global: 8192, 4096  
-    Choice: 8192, 4096 
-    => 2x2x2x2 = 16 combinationsc
-    BTB 4096 
-    Completed: L = 2048, G = 8192, C = 8192
- 
-=======
 ### Choosing Branch Predictor & its Configurations
 
 ``` vi gem5/gem5/src/cpu/simple/BaseSimpleCPU.py ```
@@ -185,4 +152,12 @@ mv -vf m5out_470/ m5out_470_backup/
 ```
 
 
->>>>>>> 904750ad0f186d6a915af582e5f06669b4d84e5e
+## Automation anywhere
+
+The Above steps have been automated using Unix Scripts 
+
+Use [localBP.sh](./automation/localBP.sh), [tournament.sh](./automation/tournament.sh), [biModBP.sh](./automation/biModBP.sh)
+
+
+
+
