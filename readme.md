@@ -76,7 +76,11 @@ Move the runGem5.sh script into one of the simulators folder
 ``` bash runGem5.sh```   
 
 The script contains the below code:  
-``` time $GEM5_DIR/build/X86/gem5.opt -d ~/m5out $GEM5_DIR/configs/example/se.py -c $BENCHMARK -o $ARGUMENT -I 100000000 --cpu-type=atomic --caches --l2cache --l1d_size=128kB --l1i_size=128kB --l2_size=1MB --l1d_assoc=2 --l1i_assoc=2 --l2_assoc=1 --cacheline_size=64 ```
+
+``` time $GEM5_DIR/build/X86/gem5.opt -d ./m5out $GEM5_DIR/configs/example/se.py -c $BENCHMARK -o "$ARGUMENT" -I 500000000 -- cpu-type=timing --caches --l2cache --l1d_size=128kB --l1i_size=128kB -- l2_size=1MB --l1d_assoc=2 --l1i_assoc=2 --l2_assoc=4 --cacheline_size=64```
+
+### The above configs remain constant throughout the program
+
 ### Main Configuration Parameters: 
 - I = # of instructions
 - BENCHMARK - the benchmark binary to be used for evaluation - it will be located inside src of the benchmark (ex: Project1_SPEC/458.sjeng/src/benchmark)
@@ -114,10 +118,30 @@ void BaseSimpleCPU::regStats() {
 
 }
 
-### Updating branch predictor configurations
+## Updating branch predictor configurations
 
+Modify the changes for specific Predictor at ``` src/cpu/pred/BranchPredictor.py```
+A sample file is attached [here](./python-simulation/BranchPredictor.py)
 
+### Possible Configurations:
+BTB Values: 4096, 2048  
 
+- Local Predictor: 2048, 1024
+    => 2x2 = 4 possible combinations
+    |BTB | Local Predictor | status |
+    |----|:---------------:|:------:|
+    |2048| 2048, 1024      | `done`   |
+    |4096| 2048, 1024      | `done`   |
 
-
-###
+- BiMod Predictor:  
+    Global: 8192, 4096, 2048  
+    Choice: 8192, 4096, 2048 
+    => 3x3x2 = 18 combinations
+- Tournament Predictor:  
+    Local: 2048, 1024   
+    Global: 8192, 4096  
+    Choice: 8192, 4096 
+    => 2x2x2x2 = 16 combinationsc
+    BTB 4096 
+    Completed: L = 2048, G = 8192, C = 8192
+ 
