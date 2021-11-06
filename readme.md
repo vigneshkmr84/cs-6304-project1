@@ -76,10 +76,14 @@ Move the runGem5.sh script into one of the simulators folder
 ``` bash runGem5.sh```   
 
 The script contains the below code:  
+<<<<<<< HEAD
 
 ``` time $GEM5_DIR/build/X86/gem5.opt -d ./m5out $GEM5_DIR/configs/example/se.py -c $BENCHMARK -o "$ARGUMENT" -I 500000000 -- cpu-type=timing --caches --l2cache --l1d_size=128kB --l1i_size=128kB -- l2_size=1MB --l1d_assoc=2 --l1i_assoc=2 --l2_assoc=4 --cacheline_size=64```
 
 ### The above configs remain constant throughout the program
+=======
+``` time $GEM5_DIR/build/X86/gem5.opt -d ~/m5out $GEM5_DIR/configs/example/se.py -c $BENCHMARK -o $ARGUMENT -I 100000000 --cpu-type=atomic --caches --l2cache --l1d_size=128kB --l1i_size=128kB --l2_size=1MB --l1d_assoc=2 --l1i_assoc=2 --l2_assoc=1 --cacheline_size=64 ```
+>>>>>>> 904750ad0f186d6a915af582e5f06669b4d84e5e
 
 ### Main Configuration Parameters: 
 - I = # of instructions
@@ -109,6 +113,8 @@ BranchMispredPercent = (numBranchMispred / numBranches) * 100;
 where: numBranchMispred -> total number of mispredicted Branches numBranches -> total number of branches fetched
 ```
 
+---
+
 
 ### Adding Custom Parameters 
 
@@ -118,6 +124,7 @@ void BaseSimpleCPU::regStats() {
 
 }
 
+<<<<<<< HEAD
 ## Updating branch predictor configurations
 
 Modify the changes for specific Predictor at ``` src/cpu/pred/BranchPredictor.py```
@@ -145,3 +152,37 @@ BTB Values: 4096, 2048
     BTB 4096 
     Completed: L = 2048, G = 8192, C = 8192
  
+=======
+### Choosing Branch Predictor & its Configurations
+
+``` vi gem5/gem5/src/cpu/simple/BaseSimpleCPU.py ```
+
+Last line update as 
+
+``` branchPred = Param.BranchPredictor(NULL, "Branch Predictor") ```
+to 
+``` branchPred = Param.BranchPredictor(LocalBP(), "Branch Predictor") ```
+
+
+``` vi gem5/gem5/src/cpu/pred/BranchPredictor.py ```
+
+```
+BTBEntries = Param.Unsigned(2048, "Number of BTB entries")
+BTBTagSize = Param.Unsigned(16, "Size of the BTB tags, in bits")
+```    
+
+
+
+
+### Backup of the files 
+
+Once you run the script and the benchmarks, do a backup of the files (common sense :P )
+
+```
+mv -vf m5out_458/ m5out_458_backup/.  
+
+mv -vf m5out_470/ m5out_470_backup/
+```
+
+
+>>>>>>> 904750ad0f186d6a915af582e5f06669b4d84e5e
