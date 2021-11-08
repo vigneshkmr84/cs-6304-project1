@@ -1,0 +1,39 @@
+children=apic_clk_domain branchPred dcache dtb dtb_walker_cache icache interrupts isa itb itb_walker_cache tracer workload
+branchPred=system.cpu.branchPred
+checker=Null
+clk_domain=system.cpu_clk_domain
+cpu_id=0
+do_checkpoint_insts=true
+do_quiesce=true
+do_statistics_insts=true
+dtb=system.cpu.dtb
+eventq_index=0
+function_trace=false
+function_trace_start=0
+--
+[system.cpu.branchPred]
+type=LocalBP
+BTBEntries=4096
+BTBTagSize=16
+RASSize=16
+eventq_index=0
+instShiftAmt=2
+localCtrBits=2
+localPredictorSize=2048
+numThreads=1
+
+====================================================================
+system.cpu.branchPred.lookups                 2856280                       # Number of BP lookups
+system.cpu.branchPred.condPredicted           2856280                       # Number of conditional branches predicted
+system.cpu.branchPred.condIncorrect              1844                       # Number of conditional branches incorrect
+system.cpu.branchPred.BTBLookups              2851466                       # Number of BTB lookups
+system.cpu.branchPred.BTBHits                 2851131                       # Number of BTB hits
+system.cpu.branchPred.BTBCorrect                    0                       # Number of correct BTB predictions (this stat may not work properly.
+system.cpu.branchPred.BTBHitPct             99.988252                       # BTB Hit Percentage
+system.cpu.branchPred.usedRAS                    2095                       # Number of times the RAS was used to get a target.
+system.cpu.branchPred.RASInCorrect                 57                       # Number of incorrect RAS predictions.
+system.cpu.branchPred.BTBMissPct             0.011748                       # BTB Miss-Percentage
+system.cpu.Branches                           2856280                       # Number of branches fetched
+system.cpu.predictedBranches                  2853226                       # Number of branches predicted as taken
+system.cpu.BranchMispred                         1844                       # Number of branch mispredictions
+system.cpu.BranchMispredPercent              0.064559                       # Percentage of Branch Mis-Predicts

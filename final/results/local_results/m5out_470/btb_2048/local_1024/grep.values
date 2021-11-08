@@ -1,0 +1,26 @@
+[system.cpu.branchPred]
+type=LocalBP
+BTBEntries=2048
+BTBTagSize=16
+RASSize=16
+eventq_index=0
+instShiftAmt=2
+localCtrBits=2
+localPredictorSize=1024
+numThreads=1
+
+====================================================================
+system.cpu.branchPred.lookups                    2540                       # Number of BP lookups
+system.cpu.branchPred.condPredicted              2540                       # Number of conditional branches predicted
+system.cpu.branchPred.condIncorrect               505                       # Number of conditional branches incorrect
+system.cpu.branchPred.BTBLookups                  640                       # Number of BTB lookups
+system.cpu.branchPred.BTBHits                     460                       # Number of BTB hits
+system.cpu.branchPred.BTBCorrect                    0                       # Number of correct BTB predictions (this stat may not work properly.
+system.cpu.branchPred.BTBHitPct             71.875000                       # BTB Hit Percentage
+system.cpu.branchPred.usedRAS                     131                       # Number of times the RAS was used to get a target.
+system.cpu.branchPred.RASInCorrect                 15                       # Number of incorrect RAS predictions.
+system.cpu.branchPred.BTBMissPct            28.125000                       # BTB Miss-Percentage
+system.cpu.Branches                              2540                       # Number of branches fetched
+system.cpu.predictedBranches                      591                       # Number of branches predicted as taken
+system.cpu.BranchMispred                          505                       # Number of branch mispredictions
+system.cpu.BranchMispredPercent             19.881890                       # Percentage of Branch Mis-Predicts
